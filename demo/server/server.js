@@ -12,7 +12,8 @@ const cacheQL = require("./cacheql");
 const controller = require("./controller");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 
+ç3000;
 
 app.use(express.json());
 app.use(logger("dev"));
@@ -31,6 +32,8 @@ cacheQL.auth();
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
+
+app.use("/build", express.static(path.join(__dirname, "../build")));
 
 app.use(
   "/graphql",
